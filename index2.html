@@ -118,19 +118,25 @@
         }
 
         .size-options {
-            display: flex;
-            gap: 15px;
-            margin: 1rem 0;
-        }
+    display: flex;
+    flex-wrap: wrap; /* Добавляем перенос на новую строку */
+    gap: 10px; /* Уменьшаем отступ между кнопками */
+    margin: 1rem 0;
+    justify-content: center; /* Центрируем кнопки */
+}
 
-        .size-option {
-            padding: 0.8rem 1.5rem;
-            background: var(--white);
-            border: 2px solid var(--pink);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+.size-option {
+    padding: 0.7rem 1.2rem; /* Уменьшаем padding */
+    background: var(--white);
+    border: 2px solid var(--pink);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-grow: 1; /* Растягиваем кнопки по ширине */
+    text-align: center;
+    min-width: calc(25% - 10px); /* 4 кнопки в ряд с отступами */
+    box-sizing: border-box;
+}
 
         .size-option.selected {
             background: var(--pink);
@@ -364,10 +370,34 @@ nav a:hover::after {
                 height: 30px;
             }
             
-            .size-option {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
+            @media (max-width: 768px) {
+    .size-option {
+        min-width: calc(50% - 10px); /* 2 кнопки в ряд на мобильных */
+        padding: 0.6rem 0.8rem; /* Еще меньше padding */
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .size-option {
+        min-width: calc(50% - 5px); /* 2 кнопки с меньшим отступом */
+        padding: 0.5rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .size-options {
+        gap: 5px; /* Уменьшаем отступ между кнопками */
+    }
+}
+
+/* Специальные стили для кнопок с минусом */
+.size-option[data-size="Без бокса"],
+.size-option[data-size="Без бумаги"] {
+    flex-grow: 0; /* Не растягиваем кнопки с минусом */
+    min-width: auto;
+    padding: 0.7rem 1rem;
+    font-weight: bold;
+}
             
             input[type="text"], textarea {
                 padding: 0.8rem;
